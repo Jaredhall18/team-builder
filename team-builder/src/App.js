@@ -2,6 +2,7 @@
 import './App.css';
 import React, { useState } from "react";
 import Form from "./Components/Form"
+import TeamMember from "./Components/TeamMember"
 
 const memberList = [
   {
@@ -28,17 +29,38 @@ function App() {
 
   const [formValues, setFormValues] =useState(initialFormValues)
 
+  const [error, setError] = useState("")
+
   const updateForm = (inputName, inputValue) => {
     setFormValues({ ...formValues, [inputName]: inputValue })
   }
 
   const submitForm = () => {
+    const newMember = {
+      memberName: formValues.name.trim(),
+      memberEmail: formValues.email.trim(),
+      memberRole: formValues.role
+    }
+    if (!newMember.memberName) {
+      setError("you must enter a username");
+    }else if (!newMember.memberEmail) {
+      setError("you must enter an email");
+    }else if (!newMember.memberRole) {
+      setError("you must select a role");
+    } else {
+      setError("")
+    }
 
+    if (!error) {
+      setTeam(team.concat(newMember));
+      setFormValues(initialFormValues)
+    }
+    
   }
 
   return (
     <div className="App">
-      <h1>Form App</h1>
+      <h1>Members List</h1>
 
       {/* {error && <h2 className="error-text">{error}</h2>}  */}
       
@@ -47,6 +69,13 @@ function App() {
       submit={submitForm}
       values={formValues}/> 
       {/* Rendering Form */}
+      {
+        team.map(member => {
+          return(
+            <TeamMember key={member.id} details={member} />
+          )
+        })
+      }
     </div>
   );
 }

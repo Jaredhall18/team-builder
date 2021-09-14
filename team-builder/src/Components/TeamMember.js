@@ -11,9 +11,9 @@ export default function Member(props) {
 
     return (
         <div>
-            <h2>{details.name}</h2>
-            <p>Email: {details.email}</p>
-            <p>Role: {details.role}</p>
+            <h2>{details.memberName}</h2>
+            <p>Email: {details.memberEmail}</p>
+            <p>Role: {details.memberRole}</p>
         </div>
     )
 }
