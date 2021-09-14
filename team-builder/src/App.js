@@ -4,19 +4,19 @@ import React, { useState } from "react";
 import Form from "./Components/Form"
 import TeamMember from "./Components/TeamMember"
 
-const memberList = [
-  {
-    memberName: "Jared",
-    memberEmail: "jared@gmail.com",
-    memberRole: "Intern"
-  },
-  {
-    memberName: "Jo",
-    memberEmail: "Jo@gmail.com",
-    memberRole: "Designer"
-  }
+// const memberList = [
+//   {
+//     memberName: "Jared",
+//     memberEmail: "jared@gmail.com",
+//     memberRole: "Intern"
+//   },
+//   {
+//     memberName: "Jo",
+//     memberEmail: "Jo@gmail.com",
+//     memberRole: "Designer"
+//   }
 
-]
+// ]
 
 const initialFormValues = {
   name:"",
@@ -48,13 +48,15 @@ function App() {
     }else if (!newMember.memberRole) {
       setError("you must select a role");
     } else {
-      setError("")
+      setTeam(team.concat(newMember));
+      setFormValues(initialFormValues);
+      // setError("")
     }
 
-    if (!error) {
-      setTeam(team.concat(newMember));
-      setFormValues(initialFormValues)
-    }
+    // if (!error) {
+    //   setTeam(team.concat(newMember));
+    //   setFormValues(initialFormValues)
+    // }
     
   }
 
@@ -62,7 +64,7 @@ function App() {
     <div className="App">
       <h1>Members List</h1>
 
-      {/* {error && <h2 className="error-text">{error}</h2>}  */}
+      {error && <h2 className="error-text">{error}</h2>} 
       
       <Form 
       update={updateForm}
